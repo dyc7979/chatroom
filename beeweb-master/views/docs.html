@@ -1,0 +1,106 @@
+{{template "base/base.html" .}}
+{{define "head"}}
+<title>{{i18n .Lang .Title}} - beego: {{i18n .Lang "app_intro"}}</title>
+{{end}}
+{{define "body"}}
+<div class="ui large vertical inverted labeled icon sidebar menu" id="menu"></a>
+    <a class="item" href="/">
+      <i class="inverted circular red awesome home icon"></i>
+      <b>{{i18n .Lang "home"}}</b>
+    </a>
+
+    {{template "docs_sidebar" .}}
+</div>
+
+<div class="ui fixed transparent inverted main menu">
+    <div class="container">
+        <a class="launch item"><i class="icon list layout"></i> {{i18n .Lang "Content"}}</a>
+        
+        {{$lang := .Lang}}
+        {{$node := .Node}}
+        {{$fullName := .FullName}}
+        {{with .Section}}
+        <div class="title item">
+            <b>beego:</b> {{i18n $lang .Name}}
+        </div>
+
+        <div class="section ui dropdown link item">
+            <span class="count">{{i18n $lang $fullName}}</span>
+
+            <div class="menu">
+                {{range .Nodes}}
+                <div class="{{if eq $node .Name}}active{{end}} item">
+                    <a href="/docs/{{.FullName}}">{{i18n $lang .FullName}}</a>
+                </div>
+                {{end}}
+            </div>
+        </div>
+        {{end}}
+
+        <div class="right menu">
+            <div class="vertically fitted borderless item">
+                <iframe src="http://ghbtns.com/github-btn.html?user=astaxie&amp;repo=beego&amp;type=watch&amp;count=true"
+                        allowtransparency="true" frameborder="0" height="20" scrolling="0" width="95"></iframe>
+            </div>
+
+            <a class="popup icon github item" title="View project on Github" href="https://github.com/astaxie/beego">
+                <i class="icon github"></i>
+            </a>
+        </div>
+    </div>
+</div>
+
+<div style="width: 70px;" class="ui black huge launch right attached button">
+    <i class="icon list layout"></i>
+    <span style="display: none;" class="text">{{i18n .Lang "Menu"}}</span>
+</div>
+
+<div class="masthead segment">
+    <div class="ui page grid">
+        <div class="column">
+            <div class="introduction">
+                <h1 class="ui header">
+                    Beego {{i18n .Lang "Framework"}}
+                    <a class="ui black label" href="">0.9.9</a>
+                </h1>
+
+                <p>{{i18n .Lang "app_shortintro"}}.</p>
+                <!-- <a class="ui black large labeled launch icon button"><i class="icon list layout"></i> View Samples</a>
+                <a class="ui red large labeled icon button" href="http://semantic-ui.com/build/semantic.zip"><i class="awesome download cloud icon"></i> Download</a> -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="stripe">
+    <div class="ui page grid">
+        <div class="ui column">
+            <h1 class="ui header">
+                {{.Title}}
+                <a class="ui blue button" target="_blank" href="https://github.com/beego/beedoc/blob/master/{{.Lang}}/{{.FullName}}.md">{{i18n .Lang "improve doc on github"}}</a>
+            </h1>
+
+            <div id="markdown" class="markdown content">{{.Data | str2html}}</div>
+            {{template "disqus"}}
+        </div>
+    </div>
+</div>
+{{end}}
+
+{{define "docs_sidebar"}}
+{{$fullName := .FullName}}
+{{$lang := .Lang}}
+{{range .Sections}}
+<div class="item">
+    <a>
+        <b>{{i18n $lang .Name}}</b>
+    </a>
+
+    <div class="menu">
+        {{range .Nodes}}
+        <a class="{{if eq $fullName .FullName}}active{{end}} item" href="/docs/{{.FullName}}">{{i18n $lang .FullName}}</a>
+        {{end}}
+    </div>
+</div>
+{{end}}
+{{end}}

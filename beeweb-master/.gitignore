@@ -1,0 +1,14 @@
+*.exe
+*.exe~
+website
+.DS_Store
+bee
+/docs
+/blog
+docTree.json
+blogTree.json
+beeweb
+/log
+bale/
+bale.go
+*.go~

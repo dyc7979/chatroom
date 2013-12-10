@@ -1,0 +1,37 @@
+{{template "base/base.html" .}}
+{{define "head"}}
+<title>{{i18n .Lang "homepage"}} - beego: {{i18n .Lang "app_intro"}}</title>
+{{end}}
+{{define "body"}}
+<a target="_blank" href="https://github.com/astaxie/beego"><img style="position: absolute; top: 70; right: 0; border: 0; z-index: 22" src="/static/img/fork-us-on-github.png" alt="Fork us on GitHub"></a>
+
+<div>
+    <div id="top" class="main-banner">
+        <div class="text-center ">
+            <div class="copy-headline">
+                <h1>{{i18n .Lang "app_shortintro"}}</h1>
+                <img id="main-image" src="/static/img/bee.png" alt="beego Logo">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="span12 text-center copy-introduction">
+            <p>{{i18n .Lang "app_fullintro" | str2html}}</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="span12 text-center action-button">
+            <a href="/docs" class="btn btn-large btn-primary">{{i18n .Lang "learn more"}}</a>
+            <a href="/quickstart" class="btn btn-large btn-success">{{i18n .Lang "get started"}}</a>
+        </div>
+    </div>
+
+    {{template "tweets.html" .}}
+
+    <p>{{i18n .Lang "site_issue" | str2html}}</p>
+</div>
+{{end}}
